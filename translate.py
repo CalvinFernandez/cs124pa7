@@ -56,7 +56,11 @@ def apply_rules(pos_tags):
     if (pos_tags[i][1] == "VBD") and (pos_tags[i-1][1] == "PRP"):
       pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
   
-  
+  #Rule 6: If there are two nouns in a row and one of them is proper, 
+  # the proper noun should come first: NNP before NNS
+  for i in range(1, len(pos_tags)):
+    if (pos_tags[i][1] == "NNP") and ((pos_tags[i-1][1] == "NNS") or (pos_tags[i-1][1] == "NN")):
+      pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
  
   #TODO: More rules
   return pos_tags 
