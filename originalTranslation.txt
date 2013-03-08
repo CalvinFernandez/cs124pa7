@@ -1,0 +1,52 @@
+i hope that the leaves no you touch the body when they fall down
+[('i hope', 'NN'), ('that', 'IN'), ('the', 'DT'), ('leaves', 'NNS'), ('no', 'DT'), ('you', 'PRP'), ('touch', 'VBP'), ('the', 'DT'), ('body', 'NN'), ('when', 'WRB'), ('they fall down', 'JJ')]
+
+
+for that no the be able to convert in crystal
+[('for', 'IN'), ('that', 'DT'), ('no', 'DT'), ('the', 'DT'), ('be able to', 'NNP'), ('convert', 'NN'), ('in', 'IN'), ('crystal', 'NN')]
+
+
+i hope that the rain stops of to be miracle that falls for you body
+[('i hope', 'NN'), ('that', 'IN'), ('the', 'DT'), ('rain', 'NN'), ('stops', 'NNS'), ('of', 'IN'), ('to be', 'JJ'), ('miracle', 'NN'), ('that', 'WDT'), ('falls', 'VBZ'), ('for', 'IN'), ('you', 'PRP'), ('body', 'VBP')]
+
+
+i hope that the moon be able to leave without you
+[('i hope', 'NN'), ('that', 'IN'), ('the', 'DT'), ('moon', 'NN'), ('be able to', '-NONE-'), ('leave', 'VBP'), ('without', 'IN'), ('you', 'PRP')]
+
+
+i hope that the earth no you kiss the steps
+[('i hope', 'NN'), ('that', 'IN'), ('the', 'DT'), ('earth', 'JJ'), ('no', 'DT'), ('you', 'PRP'), ('kiss', 'VBZ'), ('the', 'DT'), ('steps', 'NNS')]
+
+
+i hope his own you  the gaze constant
+[('i hope', 'NN'), ('his own', 'JJ'), ('you', 'PRP'), ('', '-NONE-'), ('the', 'DT'), ('gaze', 'NN'), ('constant', 'NN')]
+
+
+the word precise the smile perfect
+[('the', 'DT'), ('word', 'NN'), ('precise', 'NN'), ('the', 'DT'), ('smile', 'NN'), ('perfect', 'NN')]
+
+
+i hope happens something that you erase of quickly
+[('i hope', 'NN'), ('happens', 'NNS'), ('something', 'NN'), ('that', 'WDT'), ('you', 'PRP'), ('erase', 'VBP'), ('of', 'IN'), ('quickly', 'RB')]
+
+
+a light blinding a shot of snow
+[('a', 'DT'), ('light', 'NN'), ('blinding', 'VBG'), ('a', 'DT'), ('shot', 'NN'), ('of', 'IN'), ('snow', 'NN')]
+
+
+i hope for that which is least that me carried the death
+[('i hope', 'NN'), ('for', 'IN'), ('that which is', 'NNP'), ('least', 'JJS'), ('that', 'IN'), ('me', 'PRP'), ('carried', 'VBD'), ('the', 'DT'), ('death', 'NN')]
+
+
+for no see you so much for no see you always
+[('for', 'IN'), ('no', 'DT'), ('see you', 'PRP'), ('so much', 'JJ'), ('for', 'IN'), ('no', 'DT'), ('see you', 'PRP'), ('always', 'RB')]
+
+
+in all the seconds in all the visions
+[('in', 'IN'), ('all', 'DT'), ('the', 'DT'), ('seconds', 'NNS'), ('in', 'IN'), ('all', 'DT'), ('the', 'DT'), ('visions', 'NNS')]
+
+
+i hope that no be able to touch you not even in songs
+[('i hope', 'NN'), ('that', 'IN'), ('no', 'DT'), ('be able to', 'JJ'), ('touch you', 'PRP'), ('not even', 'JJ'), ('in', 'IN'), ('songs', 'NNS')]
+
+
