@@ -112,3 +112,11 @@ saben	know
 ellas	they
 escribir	write
 como	how
+hace	ago
+calor	heat
+tengo	have
+hambre	hunger
+yo	I
+ella	she
+es	is
+verde	green

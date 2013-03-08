@@ -1,0 +1,23 @@
+a. Our group was debating between Spanish and Japanese, since these were the two languages spoken by group members. We ultimately chose Spanish for a number of reasons.
+b. <sentences>
+c. <translated sentences>
+d. Description of Rules:
+  1.
+  2.
+  3.
+  4.
+  5.
+  6.
+  7.
+  8.
+  9.
+  10.
+e. The primary source of error in our translator came from inflexible definitions--each Spanish word had only a single English definition when in reality, many of the words have different meanings depending on the context. For example, the most common translation of the word 'mañana' was 'tomorrow,' but it can also mean 'morning.' The word is used as 'morning' in one of our sentences ('esta mañana'), but since we are only allowed one definition per word, the system returns the incorrect translation of 'tomorrow'. <expand>
+
+  Another major source of error was our POS tagger. We used a widely known and well regarded tagger, but still had major problems with its accuracy. We ran into a bit of a catch-22 situation, where the tagger couldn't tag certain words correctly unless the words were in proper English order, but we couldn't rearrange the words into proper order without the correct tags. An example of this is the fragment 'como escribir', which was translated directly as 'how write.' We had a rule that looked for the word 'how' followed by a verb, and the rule would add the word 'to' between them, giving us 'how to write,' a much more natural translation. However, the POS tagger did not recognize the 'write' in 'how write' as a verb, it was incorrectly classified as an adjective, which prevented our rule from making its transformation. As an experiment, I manually tried the phrase 'how to write' in the tagger, and it correctly tagged 'write' as a verb. Therefore, we ran into a dead end in situations like these, where neither the tagger nor the rules can do their job without the successful completion of the other. This problem could be circumvented by manually supplying the correct POS tags for the words, but we felt that this would be an unrealistic simplification (as well as a example of gross overfitting). 
+
+  A second solution to the tagger issue would be to use a unigram-style tagger that does not rely on word order, only returns the most common tag for a given unigram. This would eliminate the problem of poor initial word ordering, since word order would be irrelevant.
+
+f. <output of google translate>
+g.
+h.

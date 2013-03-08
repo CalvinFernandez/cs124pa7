@@ -16,16 +16,10 @@ def apply_rules(pos_tags):
   for i in range(1, len(pos_tags)):
     if (pos_tags[i][1] == "JJ" or pos_tags[i][1] == "RB") and (pos_tags[i-1][1] == "NN" or pos_tags[i-1][1] == "NNS" or pos_tags[i-1][1] == "NNP"):
       pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
-  
-  """  
-  for i in range(1, len(pos_tags)):
-    if (pos_tags[i][1] == "JJ") and (pos_tags[i-1][1] == "NN" or pos_tags[i-1][1] == "NNS" or pos_tags[i-1][1] == "NNP"):
-      pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
-  """
- 
+
   #RULE 2: (you) -> (your)
   for i in range(0, len(pos_tags)-1):
-    if pos_tags[i][1] == "PRP" and "VR" not in pos_tags[i+1][1] and "DT" not in pos_tags[i+1][1]:
+    if pos_tags[i][1] == "PRP" and "VB" not in pos_tags[i+1][1] and "DT" not in pos_tags[i+1][1]:
       if pos_tags[i][0] == "you":
         pos_tags[i] = ("your", pos_tags[i][1])
       if pos_tags[i][0] == "he":
@@ -61,6 +55,50 @@ def apply_rules(pos_tags):
   for i in range(1, len(pos_tags)):
     if (pos_tags[i][1] == "NNP") and ((pos_tags[i-1][1] == "NNS") or (pos_tags[i-1][1] == "NN")):
       pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
+ 
+  #Rule 7: how/want verb -> how/want to verb
+  for i in range(1, len(pos_tags)):
+    if (pos_tags[i-1][1] == "WRB" or pos_tags[i-1][0] == "how" or pos_tags[i-1][0] == "want") and "VB" in pos_tags[i][1] and pos_tags[i-1][0] != "are" and pos_tags[i-1][0] != "is":
+      pos_tags[i] = ("to " + pos_tags[i][0], "VB")
+  
+  #Rule 8: have 'special word' -> is 'special word'
+  for i in range(1, len(pos_tags)):
+    if pos_tags[i-1][0] == "have": 
+      if pos_tags[i][0] == "hunger":
+        pos_tags[i-1] = ("is", "IS")
+        pos_tags[i] = ("hungry", "JJ")      
+      elif pos_tags[i][0] == "cold":
+        pos_tags[i-1] = ("is", "IS")
+        pos_tags[i] = ("cold", "JJ")      
+    elif pos_tags[i-1][0] == "ago":
+      if pos_tags[i][0] == "heat":
+        pos_tags[i-1] = ("it's", "ITS")
+        pos_tags[i] = ("hot", "JJ")             
+      elif pos_tags[i][0] == "cold":
+        pos_tags[i-1] = ("it's", "ITS")
+        pos_tags[i] = ("cold", "JJ")      
+  
+  
+  #Rule 9: subject is -> subject am/are (possibly)
+  for i in range(1, len(pos_tags)):
+    if (pos_tags[i-1][1] == "PRP" or "NN" in pos_tags[i-1][1]) and  pos_tags[i][0] == "is":
+      if pos_tags[i-1][1] == "NNS" or pos_tags[i-1][0] == "they":
+        pos_tags[i] = ("are", "VBZ")
+      if pos_tags[i-1][0] == "I":
+        pos_tags[i] = ("am", "VBZ")
+
+  #Rule 10: Remove double negatives
+  for i in range(1, len(pos_tags)):
+    if pos_tags[i][0] == "nothing":
+      for j in range(0, min(i,8)):
+        if pos_tags[i-j][0] == "didn't" or pos_tags[i-j][0] == "don't" or pos_tags[i-j][0] == "never" or pos_tags[i-j][0] == "no":
+          pos_tags[i] = ("anything", "NN")
+          break
+  
+
+
+  
+  
  
   #TODO: More rules
   return pos_tags 
