@@ -45,7 +45,6 @@ def apply_rules(pos_tags):
       pos_tags[i] = ("", "")
       
   #Rule 5:(indirect object, verb) -> (verb, indirect object)
-    #RULE 1: (Noun, Adj|Adv) -> (Adj|Adv, Noun)
   for i in range(1, len(pos_tags)):
     if (pos_tags[i][1] == "VBD") and (pos_tags[i-1][1] == "PRP"):
       pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
@@ -118,8 +117,8 @@ def translate():
         eng_sentence += " "
       tokens = nltk.word_tokenize(eng_sentence)
       pos_tags = nltk.pos_tag(tokens)
-      print line
-      print pos_tags
+      #print line
+      #print pos_tags
       final_order = apply_rules(pos_tags)
       final = ""
       for word in final_order:

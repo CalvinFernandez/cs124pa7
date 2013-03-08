@@ -1,23 +1,95 @@
-a. Our group was debating between Spanish and Japanese, since these were the two languages spoken by group members. We ultimately chose Spanish for a number of reasons.
-b. <sentences>
-c. <translated sentences>
-d. Description of Rules:
-  1.
-  2.
-  3.
-  4.
+--- Why Spanish? ---
+Our group was debating between Spanish and Japanese, since these were the two languages spoken by group members. We ultimately chose Spanish because we felt that spanish was the simpler of the two languages to translate into English. In particular we were worried about the challenges presented by Japanese's lack of division between words and we felt that that would have posed a significant challenge to the process. We were also vaguely concerned about the japanese character representation and had doubts about the translation and reading challenges presented by the characters. Spanish was the most straightforward approach and the one we felt we could devote the most time to doing well. 
+
+--- Original Test Document ---
+Los cinco últimos pacahuaras viven en los alrededores de Alto Ivon, una remota comunidad de Beni, a donde fueron trasladados en 1969 convencidos por unos misioneros estadounidenses.
+BBC Mundo recuerda algunas de esas frases con las que logró colocarse bajo los reflectores de la opinión popular.
+No creo que haya estudiado mucho, porque ha suspendido el examen.
+Dos días después, se encuentran en la cafetería de la Universidad.
+El bofetón llegó sin previo aviso.
+Pero si todo cuanto he dicho no basta a moverte de tu mal propósito, bien puedes buscar otro instrumento de tu deshonra y desventura.
+En los tres días primeros nunca Lotario le dijo nada.
+Porqué no vas, Leonela, a llamar al más leal amigo de amigo que vio el sol o cubrió la noche?
+Los muchachos llevaron las maletas viejas al cuarto.
+Las muchachas escribieron la carta esta mañana pero ellas no saben como escribir.
+want escribir.
+hace calor, yo tengo hambre.
+muchachos es verde.
+
+--- System Output ---
+the five last pacahuaras live in the surroundings of high Ivon , a Beni's remote  community , to where to were transferred in 1969 convinced by some American missionaries .
+BBC world recalls some of those phrases with the that achieved be placed below the reflectors of the opinion popular .
+no think that have studied much because has suspended the examination .
+two days after found oneself in the cafeteria of the university .
+the slap came without previous notice .
+but if all when I saying no enough to move of your bad well purpose can search other instrument of your dishonor and misfortune .
+in the three first never Lotario days said him anything .
+why no Leonela go , to call to the more loyal friend's  friend that saw the sun or covered the night ?
+the boys carried the old baggage to the room .
+the girls wrote the letter this tomorrow but they don't know how write .
+want to write .
+it's hot I am hungry .
+boys are green .
+
+--- Rules ---
+
+  1. This rule switches all noun, adj|adv pairs to adj|adv, noun. For example: Tengo un gato verde, directly translates to, "I have a cat green"; however, we say, "I have a green cat." In Spanish, sentences are always constructed as noun, adjective|adverb. In english, sentences are always constructed in oposite way. This rule corrects that difference between english and spanish.
+
+  2. A simple correction that changes "you" to "your". // Roberto you're going to have to do this one
+  
+  3. This change turns 'no's into 'don't's when they're preceeded by personal pronoun or noun. For example, from our test sentences: Las muchachas escribieron la carta esta mañana pero ellas no saben como escribir. "... ellas no saben ..." . Our dictionary directly translates "no saben" to "no know." This is obviously wrong in English but the translation of the spanish word "no" to the English word "no" is a correct definition for spanish "no" as it can be used in a sentence to mean "no", for example "no, nosotros no lo queremos." translates to "No, we don't want that". We can see from this example that "No" is translated to both English "No" and English "don't", but when does it translate to correct type of "no"? Our rule only converted "No" into "don't|doesn't" when no is preceeded by a personal pronoun or noun. This way, our sentence, "... ellas no saben ...", while directly translates to "... they no know ...", translates, with our rule, to "they don't know."
+  
+  4. Change 4 was an english simplification to make the sentence sound more fluent. For this change, whenever we saw the sequence, NOUN "of" NOUN, we immediately classified this as a contraction, "Noun's noun". For example, from out test sentences: Porqué no vas, Leonela, a llamar al más leal amigo de amigo que vio el sol o cubrió la noche? The line "amigo de amigo" translates directly in English to "friend of friend". With our rule, the sentence gets translated to "friend's friend" which makes more fluent sense in English.
+
   5.
-  6.
-  7.
+  6. Change 6 does the following: If there are two nouns in a row and one of them is proper, the proper noun should come first. For example, from out test sentences, we have the line "... 1969 convencidos por unos misioneros estadounidenses." The last two words, "misioneros estadounidenses" translates to "missionaries United States" in English. In this case, a proper noun, "United States", comes after the regular noun, "Missionaries" and in English we swap these to make "United States missionaries." This rule fixes that difference between Spanish and English by swapping all nouns, proper noun pairings. 
+  
+  7. Change 7 also reflects a difference in between Spanish and English. In our test sentences we had the line, "no saben como comer" which our dictionary translated directly to "no know how eat." Ignoring the first half of the sentence, "how eat" is obviously wrong. In English, we say "how TO eat." With this change, we insert a 'to' whenever we see a ('WRB'|'how'|'want'), 'VB' pairing between the first and second words. This fixes the problem of "how eat" and makes our sentences sound more fluent.
+
   8.
   9.
   10.
-e. The primary source of error in our translator came from inflexible definitions--each Spanish word had only a single English definition when in reality, many of the words have different meanings depending on the context. For example, the most common translation of the word 'mañana' was 'tomorrow,' but it can also mean 'morning.' The word is used as 'morning' in one of our sentences ('esta mañana'), but since we are only allowed one definition per word, the system returns the incorrect translation of 'tomorrow'. <expand>
 
-  Another major source of error was our POS tagger. We used a widely known and well regarded tagger, but still had major problems with its accuracy. We ran into a bit of a catch-22 situation, where the tagger couldn't tag certain words correctly unless the words were in proper English order, but we couldn't rearrange the words into proper order without the correct tags. An example of this is the fragment 'como escribir', which was translated directly as 'how write.' We had a rule that looked for the word 'how' followed by a verb, and the rule would add the word 'to' between them, giving us 'how to write,' a much more natural translation. However, the POS tagger did not recognize the 'write' in 'how write' as a verb, it was incorrectly classified as an adjective, which prevented our rule from making its transformation. As an experiment, I manually tried the phrase 'how to write' in the tagger, and it correctly tagged 'write' as a verb. Therefore, we ran into a dead end in situations like these, where neither the tagger nor the rules can do their job without the successful completion of the other. This problem could be circumvented by manually supplying the correct POS tags for the words, but we felt that this would be an unrealistic simplification (as well as a example of gross overfitting). 
+--- Error Analysis ---
 
-  A second solution to the tagger issue would be to use a unigram-style tagger that does not rely on word order, only returns the most common tag for a given unigram. This would eliminate the problem of poor initial word ordering, since word order would be irrelevant.
+The primary source of error in our translator came from inflexible definitions--each Spanish word had only a single English definition when in reality, many of the words have different meanings depending on the context. For example, the most common translation of the word 'mañana' was 'tomorrow,' but it can also mean 'morning.' The word is used as 'morning' in one of our sentences ('esta mañana'), but since we are only allowed one definition per word, the system returns the incorrect translation of 'tomorrow'. <expand>
 
-f. <output of google translate>
-g.
-h.
+Another major source of error was our POS tagger. We used a widely known and well regarded tagger, but still had major problems with its accuracy. We ran into a bit of a catch-22 situation, where the tagger couldn't tag certain words correctly unless the words were in proper English order, but we couldn't rearrange the words into proper order without the correct tags. An example of this is the fragment 'como escribir', which was translated directly as 'how write.' We had a rule that looked for the word 'how' followed by a verb, and the rule would add the word 'to' between them, giving us 'how to write,' a much more natural translation. However, the POS tagger did not recognize the 'write' in 'how write' as a verb, it was incorrectly classified as an adjective, which prevented our rule from making its transformation. As an experiment, I manually tried the phrase 'how to write' in the tagger, and it correctly tagged 'write' as a verb. Therefore, we ran into a dead end in situations like these, where neither the tagger nor the rules can do their job without the successful completion of the other. This problem could be circumvented by manually supplying the correct POS tags for the words, but we felt that this would be an unrealistic simplification (as well as a example of gross overfitting). 
+
+A second solution to the tagger issue would be to use a unigram-style tagger that does not rely on word order, only returns the most common tag for a given unigram. This would eliminate the problem of poor initial word ordering, since word order would be irrelevant.
+
+--- Google Translate's Version
+
+The last five Pacahuaras live around Alto Ivon, a remote community of Beni, where they were transferred in 1969 convinced by American missionaries.
+BBC remembers some of those phrases that managed to be placed in the spotlight of popular opinion.
+I do not think you have studied a lot, because he failed the exam.
+Two days later, in the cafeteria of the University.
+The slap came without warning.
+But if all I have said is not enough to move from your evil way, well you can find another instrument of your disgrace and misfortune.
+In the first three days Lothario never said anything.
+Why not you, Leonela, call the most loyal friend of friend who saw the sun or covered the night?
+The boys took the old suitcases to the room.
+The girls wrote the letter this morning but they do not know how to write.
+want to write.
+it's hot, I have hunger.
+boys is green.
+
+--- Zach, Calvin and Roberto Versus Google! ---
+
+Where our two translators agree: 
+  We agree mostly on the very simple sentences, those without any idioms at all. For example, the sentence "The boys took the old suitcases to the room" and the sentence, "The slap came without warning," were both translated perfectly by Google and by us. These sentences are simple and in the present tense. The sentences contain no idioms and the words assume their literal meanings thus making them perfect candidates for a direct translation algorithm. 
+
+Errors by Google: 
+  Google messes up a little when it's transcribing sentence #8. The sentence says "más leal amigo de amigo que vio el sol o cubrió la noche" which translates approximately to "most loyal friend that ever lived." However, this idiom seems to have been lost on Google. Google didn't translate "friend of friend" to "friend's friend" which is syntactically equivalent to the English phrase, "a Man's man" meaning, "the most manly of men." Additionally, the phrase, "que vie el sol o cubrió la noche", doesn't literally mean, "that saw the sun or covered the night." This is another idiom lost on the Google machine which would be better translated in english to, "that ever lived." 
+
+Google is better than us:
+
+  Google does much better at translating idioms than we do. Thus, our sentences which were more complicated, like the BBC sentence (sentence #2) or the Don Quixote sentence (sentence #6), make a lot more sense when Google translates it. The phrase "colocarse bajo los reflectores de la opinión popular" translates literally to "hang under the reflectors of the opinion popular." Google knew that this was an idiom meaning, "popular opinion" and was able to take advantage of that knowledge to improve the translation. Our translator was not allowed to use idioms so we had to stick with literal meanings. Additionally, Google takes advantage of the the multiple meanings of words to correctly translate the word "mañana" into the word "tomorrow" in sentence #10. As we weren't able to use multiple meanings or idioms, our translations are lacking in that area. 
+
+  Additionally, Google makes an interesting choice for sentence #3. In spanish the sentence says, "No creo que haya estudiado mucho, porque ha suspendido el examen." If you look closely at the start of the sentence, you'll notice that there's an implicit subject, "Yo" before the "No." If the subject were written explicitly, the sentence would go, "YO no creo que haya ..." This is perfectly fine to write in Spanish as the subject is capture by the verb "creer" and the conjugation, "creo" meaning, "I believe." However, this is not captured by our translator. Google is capable of capturing this meaning and inserts the "I" in front of "believe" because they can look at the verb and the conjugation of the verb and determine the appropriate words to include.
+
+  Google did a particularly admirable job at translating the Don Quixote sentence, which began with, "Pero si todo cuanto he dicho no basta a moverte de tu mal propósito." As Don Quixote is particularly archaic spanish, we were surprised that Google was able to translate "todo cuanto he dicho" to, "all I have said" as "todo cuanto" is a particularly convoluted way of saying, "todo he dicho" which is a simpler albeit entirely un-Miguel de Cervantes, way of saying "all I have said." 
+
+--- Who did what ---
+
+We all wrote the code for direct translation individually so that we could have practice with the algorithm. As a team, we met and came up with rules for translation. Zach took the lead on this. Roberto and Calvin took the lead on explaining the translations and finishing the write-up.
