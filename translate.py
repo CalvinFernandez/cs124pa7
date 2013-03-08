@@ -12,9 +12,9 @@ def init_dict():
   return e_f_dict
       
 def apply_rules(pos_tags):
-  #RULE 1: (Noun, Adj) -> (Adj, Noun)
+  #RULE 1: (Noun, Adj|Adv) -> (Adj|Adv, Noun)
   for i in range(1, len(pos_tags)):
-    if (pos_tags[i][1] == "JJ") and (pos_tags[i-1][1] == "NN" or pos_tags[i-1][1] == "NNS" or pos_tags[i-1][1] == "NNP"):
+    if (pos_tags[i][1] == "JJ" or pos_tags[i][1] == "RB") and (pos_tags[i-1][1] == "NN" or pos_tags[i-1][1] == "NNS" or pos_tags[i-1][1] == "NNP"):
       pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
   
   """  
@@ -49,7 +49,13 @@ def apply_rules(pos_tags):
       pos_tags[i+1] = (pos_tags[i-1][0], pos_tags[i-1][1])
       pos_tags[i-1] = next_i_minus_1
       pos_tags[i] = ("", "")
-
+      
+  #Rule 5:(indirect object, verb) -> (verb, indirect object)
+    #RULE 1: (Noun, Adj|Adv) -> (Adj|Adv, Noun)
+  for i in range(1, len(pos_tags)):
+    if (pos_tags[i][1] == "VBD") and (pos_tags[i-1][1] == "PRP"):
+      pos_tags[i], pos_tags[i-1] = pos_tags[i-1], pos_tags[i]
+  
   
  
   #TODO: More rules
